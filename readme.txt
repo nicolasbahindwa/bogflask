@@ -51,3 +51,44 @@ b'$2b$12$i03CJiNvhSkEeCadShuXVeZdXs.cND5lBK3njU9zJy0unkhH9Mj66'
 >>> bcrypt.check_password_hash(password, 'testing')
 True
 >>>
+
+
+==================== pagination-------------------
+
+>>> from blog.models import Post
+C:\Users\USER\AppData\Local\Programs\Python\Python39\lib\site-packages\flask_sqlalchemy\__init__.py:872: FSADeprecationWarning: SQLALCHEMY_TRACK_MODIFICATIONS adds significant overhead and will be disabled by default in the future.  Set it to True or False to suppress this warning.
+  warnings.warn(FSADeprecationWarning(
+>>>
+>>> Post.query.all()
+[Post('GOING ABOVE AND BEYOND TO SERVE ','2021-12-16 03:48:18.674232'), Post('Human resources office','2021-12-22 01:15:18.669420'), Post('Honest And Dependable','2021-12-22 01:16:01.305422'), Post('parallel thinking','2021-12-22 01:17:42.952203'), Post('what people say about the world','2021-12-22 01:18:19.265167')]
+>>>
+>>> posts = Post.query.paginate()
+>>> posts
+<flask_sqlalchemy.Pagination object at 0x000001CE966699A0>
+>>> dir(posts)
+['__class__', '__delattr__', '__dict__', '__dir__', '__doc__', '__eq__', '__format__', '__ge__', '__getattribute__', '__gt__', '__hash__', '__init__', '__init_subclass__', '__le__', '__lt__', '__module__', '__ne__', '__new__', '__reduce__', '__reduce_ex__', '__repr__', '__setattr__', '__sizeof__', '__str__', '__subclasshook__', '__weakref__', 'has_next', 'has_prev', 'items', 'iter_pages', 'next', 'next_num', 'page', 'pages', 'per_page', 'prev', 'prev_num', 'query', 'total']
+>>>
+>>>
+>>> posts.per_page
+20
+>>> posts.page
+1
+>>> for post in posts.items:
+...     print(post)
+...
+Post('GOING ABOVE AND BEYOND TO SERVE ','2021-12-16 03:48:18.674232')
+Post('Human resources office','2021-12-22 01:15:18.669420')
+Post('Honest And Dependable','2021-12-22 01:16:01.305422')
+Post('parallel thinking','2021-12-22 01:17:42.952203')
+Post('what people say about the world','2021-12-22 01:18:19.265167')
+>>>
+>>> posts = Post.query.paginate(per_page=3)
+>>> posts.page
+1
+>>> for post in posts.items:
+...     print(post)
+...
+Post('GOING ABOVE AND BEYOND TO SERVE ','2021-12-16 03:48:18.674232')
+Post('Human resources office','2021-12-22 01:15:18.669420')
+Post('Honest And Dependable','2021-12-22 01:16:01.305422')
+>>>
