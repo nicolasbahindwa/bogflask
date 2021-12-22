@@ -7,3 +7,5 @@ __pycache__/
 
 # image folder
 static/profile/
+
+.env

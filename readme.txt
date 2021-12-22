@@ -92,3 +92,23 @@ Post('GOING ABOVE AND BEYOND TO SERVE ','2021-12-16 03:48:18.674232')
 Post('Human resources office','2021-12-22 01:15:18.669420')
 Post('Honest And Dependable','2021-12-22 01:16:01.305422')
 >>>
+
+
+
+================== generate expirely token ===============
+>>>
+>>> from itsdangerous import TimedJSONWebSignatureSerializer as serializer
+>>>
+>>> s = serializer('secret', 30)
+>>> token = s.dumps({'user_id': 1}).decode('utf-8')
+>>> token
+'eyJhbGciOiJIUzUxMiIsImlhdCI6MTY0MDE0NjUxOCwiZXhwIjoxNjQwMTQ2NTQ4fQ.eyJ1c2VyX2lkIjoxfQ.7OlHQeZ8eEuQxvo-o4mXCTW24VPRRq_Kfhi5Z84-LrSUX1IKHKzUiOOl9XTqGD7ygQt1NP4DxjQonxiPftoXBA'
+>>> s.loads(token)
+{'user_id': 1}
+>>> s.loads(token)
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+  File "C:\Users\USER\AppData\Local\Programs\Python\Python39\lib\site-packages\itsdangerous\jws.py", line 233, in loads
+    raise SignatureExpired(
+itsdangerous.exc.SignatureExpired: Signature expired
+>>>
